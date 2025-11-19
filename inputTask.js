@@ -124,10 +124,20 @@ function handleCheckboxChange(event) {
 }
 
 
- function openInMaps(lat, lon) {
-  const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`;
-  window.open(url, "_blank");
+async function openInMaps(destLat, destLon) {
+  try {
+    // Get user's current location
+    const { lat: originLat, lon: originLon } = await getUserLocation();
+
+    // Build Google Maps URL with origin & destination
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${originLat},${originLon}&destination=${destLat},${destLon}`;
+
+    window.open(url, "_blank");
+  } catch (err) {
+    alert("Unable to get your current location: " + err.message);
+  }
 }
+
 
 
 async function reverseGeocode(lat, lon) {
@@ -327,6 +337,7 @@ class Modal extends task {
       note,
       time: timeStr,
       timeRem: deadlineTS,
+      coords,
     });
 
     saveWorkoutsToLocalStorage();
@@ -377,30 +388,16 @@ class Modal extends task {
 
   // If coords exist on the task, enable the navigation button
   if (task.coords && task.coords.lat && task.coords.lon) {
-    // show button (if hidden) and attach handler
-    newNavigate.classList.remove("hidden");
-    newNavigate.disabled = false;
-    newNavigate.onclick = () =>
-      openInMaps(task.coords.lat, task.coords.lon);
-  } else {
-    // no coords — either hide the button or make it open Google Maps search with the readable location
-    newNavigate.classList.remove("hidden"); // optional: show a fallback behavior
-    newNavigate.disabled = false;
-    // fallback: if we have a readable address, open maps search; otherwise disable
-    if (task.location && task.location.trim().length > 0) {
-      newNavigate.onclick = () =>
-        window.open(
-          `https://www.google.com/maps/dir/?api=1&query=${encodeURIComponent(
-            task.location
-          )}`,
-          "_blank"
-        );
-    } else {
-      newNavigate.disabled = true;
-      newNavigate.classList.add("disabled");
-      newNavigate.onclick = null;
-    }
-  }
+  newNavigate.onclick = () => openInMaps(task.coords.lat, task.coords.lon);
+} else if (task.location && task.location.trim().length > 0) {
+  newNavigate.onclick = () =>
+    window.open(
+      `https://www.google.com/maps/dir/?api=1&query=${encodeURIComponent(task.location)}`,
+      "_blank"
+    );
+} else {
+  newNavigate.disabled = true;
+}
 
   function shortenAddress(fullAddress) {
   return fullAddress.split(",")[0].trim();
