@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Return Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    <video autoplay muted loop playsinline id="bgVideo">
+      <source src="./assets/mixkit-stars-floating-in-the-dark-universe-32982-hd-ready (1).mp4" type="video/mp4" />
+    </video>
+    <div class="overlay">
+      <div class="main">
+        <h2 class="title">R/V Tracker</h2>
+        <form class="addTask">
+          <!-- From Uiverse.io by andrew-demchenk0 --> 
+          
+          <button type="button"  class="add button ">
+<span class="button__text">New RV</span>
+<span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+</button>
+</form>
+        <div class="class">
+        </div>
+      </div>
+      
+      <div id="movie-modal" class="taskAbout hidden">
+        <div class="modal-content ">
+            <span class=" close-modal closeTask ">&times;</span>
+           <h1 class="modalTitle"></h1>
+           <h4 class="location"></h4>
+           <button class="navigate">Navigate</button>
+            <h4 class="addANote"></h4>
+            <h5 class="Deadline"></h5>
+            <!-- <p class="LiveCountdown" id="liveCountdown">⏳ Countdown loading...</p> -->
+            
+           
+     </div>
+       </div>
+       <div id="movie-modal" class="modal hidden">
+         <div class="modal-content ">
+    <span class="close-modal closeTask">&times;</span>
+    <div class="task-info">
+      <div id="modal-details">
+        
+        <p class="warning">
+          <i class="fa-solid fa-ban"></i> Please Provide Return Visit Name, Location and Deadline</p>
+        <h3><input placeholder="John Doe" class="titleTask" required /></h3>
+        <p class="nameEntry">name</p>
+
+        <p class="nameEntry">Location</p>
+
+<div class="location-row">
+  <input type="text" class="locationText" placeholder="Enter location manually">
+  <button class="useLocation">Use My Location</button>
+</div>
+
+          
+          <textarea placeholder="Add details" class="task-note"></textarea>
+          <form class="form">
+            <div class="form__row">
+              <label class="form__label">Coming back on</label>
+              <input
+              class="form__input form__input--duration"
+              placeholder="min"
+              input
+              required
+              type="datetime-local"
+              />
+            </div>
+          </form>
+          <button type="submit" class="save-note-btn">Save</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- <div class="info-modal">
+  <span class="close-modal closeTask">&times;</span>
+  RV(Return Visit) Tracker 
+  is a tool specialized 
+  for Jehovah's Witnesses 
+  to assist them in keeping track
+  of return visits and all 
+  those who are interested
+  in studying the bible
+  <div class="warning">Please note that
+    this application is not an official
+    app recognized by Jehovah's Witnesses Organization</span>
+  </div>
+</div> -->
+<div class="outside hidden"></div>
+<script src="inputTask.js">
+
+
+</script>
+</body>
+</html>
