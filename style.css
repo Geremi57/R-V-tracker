@@ -570,7 +570,13 @@ input {
     flex-direction: column;
     gap: 0.5rem;
   }
-
+  .useLocation{
+    position: relative;
+    /* display: flex; */
+  }
+  .locationText{
+    width: 12px;
+  }
   .save-note-btn {
     position: relative;
     top: auto;
