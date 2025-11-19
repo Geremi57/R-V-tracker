@@ -622,6 +622,24 @@ document.querySelector(".useLocation").addEventListener("click", async () => {
 });
 
 
+const infoBtn = document.getElementById("open-info");
+const infoModal = document.getElementById("info-modal");
+const closeInfo = document.querySelector(".close-info");
+
+infoBtn.addEventListener("click", () => {
+  infoModal.classList.remove("hidden");
+});
+
+closeInfo.addEventListener("click", () => {
+  infoModal.classList.add("hidden");
+});
+
+// Click outside to close
+infoModal.addEventListener("click", (e) => {
+  if (e.target === infoModal) infoModal.classList.add("hidden");
+});
+
+
 // getCurrentPosition()
 
 

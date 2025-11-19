@@ -1,21 +1,21 @@
 :root {
-  --color-primary: rgb(26, 25, 37);
-  --color-background: linear-gradient(to right, #155799, #159957);
+  --color-primary: #1a1a2e; /* still dark for text contrast */
+  --color-background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* soft, modern gradient */
   --color-secondary: #fff;
+  --color-accent: #FF6B6B; /* for buttons, highlights, warnings */
+  --color-modal-bg: rgba(255, 255, 255, 0.12); /* slightly frosted modal */
 }
+body {
+  font-family: "Lucida Console", "Courier New", monospace;
+  background: var(--color-background);
+  color: var(--color-primary);
+}
+
 html {
   padding: 0;
   margin-right: 0;
 }
-body {
-  font-family: "Lucida Console", "Courier New", monospace;
-  overflow-x: hidden;
-  background-color: black;
-  /* padding: 100px 400px 0 400px; */
-  background: #159957;
 
-  background: var(--color-background);
-}
 .overlay {
   display: flex;
   /* background-color: #155799; */
@@ -659,6 +659,112 @@ input {
   cursor: pointer;
 }
 
+/* Floating Info Button */
+.info-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+  padding: 12px 14px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  z-index: 2000;
+}
+
+.info-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.1);
+}
+
+/* Modal Background */
+.info-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2500;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Modal Box */
+.info-content {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  padding: 25px 30px;
+  border-radius: 20px;
+  width: 85%;
+  max-width: 420px;
+  color: #fff;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.4);
+  position: relative;
+  animation: fadeIn 0.35s ease-out;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* Close Button */
+.close-info {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s ease;
+}
+
+.close-info:hover {
+  color: #f87171;
+  transform: scale(1.15);
+}
+
+/* Title */
+.info-title {
+  margin-top: 0;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* Paragraphs */
+.info-text {
+  font-size: 1rem;
+  margin: 12px 0;
+  line-height: 1.5;
+}
+
+/* Warning Section */
+.warning {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-left: 4px solid #ffae00;
+  background: rgba(255, 174, 0, 0.15);
+  border-radius: 8px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+
 .custom-checkbox::after {
   content: "";
   position: absolute;
@@ -918,3 +1024,38 @@ input {
   margin-bottom: 1rem;
   font-weight: 500;
 }
+
+
+
+.main, .info-content, .taskAbout .modal-content {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  color: #fff;
+}
+
+
+.info-content {
+  border: 1px solid rgba(255, 107, 107, 0.6);
+}
+
+
+
+
+.info-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-primary);
+}
+
+.info-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+
+
