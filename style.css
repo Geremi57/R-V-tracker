@@ -344,6 +344,44 @@ input {
   /* color: var(--color-background); */
 }
 
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Simple spinner */
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #fff;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
 .modal {
   /* background-color: beige; */
   /* position: absolute;
@@ -631,4 +669,246 @@ input {
 /* Show the checkmark when checkbox is checked */
 .input[type="checkbox"]:checked + .custom-checkbox::after {
   opacity: 1;
+}
+
+/* From Uiverse.io by dexter-st */ 
+.map-btn-wrapper {
+  --btn-color: #f5101b;
+  --text-color: #fff;
+  --land-color: #ffdd9f;
+  --veg-color: #36ad5aa9;
+  --water-color: #b3e3ff;
+  --transition-dur: 0.3s;
+
+  position: relative;
+  display: flex;
+
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+
+  user-select: none;
+  overflow: hidden;
+  border-radius: 50ch;
+
+  box-shadow:
+    0px -1px 2px rgba(3, 7, 18, 0.005),
+    0px -5px 6px rgba(3, 7, 18, 0.009),
+    0px -12px 12px rgba(3, 7, 18, 0.015),
+    0px -20px 22px rgba(3, 7, 18, 0.02),
+    0px -32px 32px rgba(3, 7, 18, 0.06);
+
+  transition: transform var(--transition-dur) ease;
+}
+
+.map-btn {
+  cursor: pointer;
+  padding: 1em 1.5em 1em 3.5em;
+
+  border-radius: 50ch;
+
+  background-color: var(--btn-color);
+
+  font-weight: 600;
+  color: var(--text-color);
+
+  transition:
+    color var(--transition-dur) ease-in-out,
+    background-color var(--transition-dur) ease-in-out;
+}
+
+.pinpoint {
+  pointer-events: none;
+  position: absolute;
+  height: 60%;
+  aspect-ratio: 1;
+  top: 20%;
+  left: 0.75em;
+
+  border-radius: 50% 50% 50% 50%;
+  background-color: var(--text-color);
+  transform: rotateZ(45deg);
+
+  mask-image: radial-gradient(circle at center, #0000 0%, #0000 32%, #fff 36%);
+  filter: blur(0.25px);
+  transition:
+    background-color var(--transition-dur) ease-in-out,
+    transform var(--transition-dur) ease-in-out,
+    border-radius calc(var(--transition-dur) + 0.1s) ease;
+  z-index: 1;
+}
+
+.map-container {
+  pointer-events: none;
+  position: absolute;
+  left: 0px;
+  top: 115px;
+  perspective: 120px;
+  transform: perspective(120px) rotateX(35deg) scaleX(0);
+  transform-origin: 3em 0.5em;
+  transition:
+    transform var(--transition-dur) ease-in-out,
+    opacity var(--transition-dur) ease-in-out;
+  opacity: 0;
+  z-index: 0;
+}
+
+.map {
+  position: absolute;
+  bottom: 100px;
+  width: 120px;
+  height: 200px;
+  background-color: var(--water-color);
+  background-image: linear-gradient(to bottom, #fff2, 30%, #0000);
+  transform-origin: left bottom;
+}
+.map::after {
+  content: "";
+  top: -40;
+  left: 12;
+  width: 100%;
+  height: 200%;
+  background-color: var(--land-color);
+  position: absolute;
+  filter: url(#land);
+  box-shadow: inset 0 0 48px 24px var(--veg-color);
+  z-index: 0;
+}
+.fold-1,
+.fold-2,
+.fold-3,
+.fold-4 {
+  mask-image: linear-gradient(to top, #fff, 97%, #0000);
+  overflow: hidden;
+}
+
+.fold-1 {
+  left: -60px;
+  transform: rotateY(10deg) translateZ(30px);
+}
+.fold-2 {
+  left: 60px;
+  transform: rotateY(-10deg) translateZ(10px);
+}
+.fold-3 {
+  left: -169px;
+  transform: rotateY(-15deg) translateZ(-1px);
+}
+.fold-4 {
+  left: 166px;
+  transform: rotateY(15deg) translateZ(31px);
+}
+.fold-1::before,
+.fold-2::before,
+.fold-3::before,
+.fold-4::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 10px 16px 3px #0004;
+  z-index: 1;
+}
+
+/* Hover states */
+.map-btn-wrapper:has(.map-btn:hover) {
+  transform: scale(1.1);
+}
+.map-btn:hover {
+  background-color: var(--text-color);
+  color: #000;
+  /* z-index: 100000; */
+}
+.map-btn:hover + .pinpoint {
+  background-color: var(--btn-color);
+  border-radius: 50% 50% 0 50%;
+  transform: rotateZ(45deg) translate(-0.3em, -0.3em);
+}
+.map-btn:hover ~ .map-container {
+  transform: perspective(100px) rotateX(35deg) scaleX(0.85);
+  opacity: 1;
+}
+
+/* Active states */
+.map-btn-wrapper:has(.map-btn:active) {
+  transform: scale(1.02) translateY(0.2em);
+}
+.map-btn:active + .pinpoint {
+  transform: rotateZ(45deg) translate(0em, 0em);
+  transition-duration: calc(var(--transition-dur) * 0.5);
+}
+.map-btn:active ~ .map-container {
+  transform: perspective(95px) rotateX(35deg) scaleX(0.85);
+  transition-duration: calc(var(--transition-dur) * 0.5);
+}
+
+
+.location-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.locationText {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #2d2d3a;
+  color: #eee;
+  font-size: 0.95rem;
+}
+
+.locationText:focus {
+  outline: none;
+  border-color: #64ffda;
+  box-shadow: 0 0 5px #64ffda;
+}
+
+.useLocation {
+  padding: 10px 14px;
+  background: #64ffda;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #0a0a0f;
+  font-weight: bold;
+  transition: 0.25s ease;
+}
+
+.useLocation:hover {
+  background: #52d9bb;
+  transform: translateY(-2px);
+}
+/* 
+.navigate {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 12px;
+  background: #34974d;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+}
+
+.navigate:hover {
+  background: #2e8644;
+  transform: scale(1.03);
+}
+
+.navigate:active {
+  background: #256e38;
+  transform: scale(0.97);
+} */
+
+.taskAbout .location {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }

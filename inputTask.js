@@ -139,6 +139,35 @@ async function reverseGeocode(lat, lon) {
   return data.display_name || "Unknown location";
 }
 
+function getUserLocation() {
+  const loader = document.getElementById("location-loading");
+
+  loader.classList.remove("hidden");
+
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        loader.classList.add("hidden");
+        resolve({
+          lat: pos.coords.latitude,
+          lon: pos.coords.longitude,
+          accuracy: pos.coords.accuracy
+        });
+      },
+      (error) => {
+        loader.classList.add("hidden");
+        reject(error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 0
+      }
+    );
+  });
+}
+
+
 
 class task {
   day;
@@ -567,33 +596,31 @@ document.querySelector(".modal").addEventListener("click", function (e) {
     closeAddTask();
   }
 });
-document.querySelector(".useLocation").addEventListener("click", () => {
-  if (!navigator.geolocation) {
-    alert("Geolocation not supported");
-    return;
-  }
+document.querySelector(".useLocation").addEventListener("click", async () => {
+  try {
+    const { lat, lon } = await getUserLocation();
 
-  navigator.geolocation.getCurrentPosition(async (pos) => {
-    const { latitude, longitude } = pos.coords;
+    const locationName = await reverseGeocode(lat, lon);
 
-    const locationName = await reverseGeocode(latitude, longitude);
-
-    const navigate = document.querySelector(".navigate");
-    navigate.addEventListener("click",function() {
-      openInMaps(latitude, longitude)
-      console.log("yaaaaaah")
-    });
-
+    // Set location text
     document.querySelector(".locationText").value = locationName;
 
+    // Store for saving task
     localStorage.setItem(
       "currentRVLocation",
-      JSON.stringify({ lat: latitude, lon: longitude, address: locationName })
+      JSON.stringify({ lat, lon, address: locationName })
     );
 
+    // Enable navigation button correctly
+    const navigate = document.querySelector(".navigate");
+    navigate.onclick = () => openInMaps(lat, lon);
+
     alert("Location set!");
-  });
+  } catch (err) {
+    alert("Unable to get your location: " + err.message);
+  }
 });
+
 
 // getCurrentPosition()
 

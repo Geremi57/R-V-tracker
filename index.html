@@ -17,7 +17,7 @@
         <form class="addTask">
           <!-- From Uiverse.io by andrew-demchenk0 --> 
           
-          <button type="button"  class="add button ">
+          <button type="button"  class="add button">
 <span class="button__text">New RV</span>
 <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
 </button>
@@ -31,7 +31,37 @@
             <span class=" close-modal closeTask ">&times;</span>
            <h1 class="modalTitle"></h1>
            <h4 class="location"></h4>
-           <button class="navigate">Navigate</button>
+           <!-- From Uiverse.io by dexter-st --> 
+<div class="navigate map-btn-wrapper">
+  <svg height="0" width="0">
+    <filter id="land">
+      <feTurbulence
+        result="turb"
+        numOctaves="7"
+        baseFrequency="0.006"
+        type="fractalNoise"
+      ></feTurbulence>
+      <feDisplacementMap
+        yChannelSelector="G"
+        xChannelSelector="R"
+        scale="700"
+        in="SourceGraphic"
+        in2="turb"
+      ></feDisplacementMap>
+    </filter>
+  </svg>
+
+  <div class="map-btn">View on Map</div>
+
+  <div class="pinpoint"></div>
+  <div class="map-container">
+    <div class="map fold-1"></div>
+    <div class="map fold-2"></div>
+    <div class="map fold-3"></div>
+    <div class="map fold-4"></div>
+  </div>
+</div>
+
             <h4 class="addANote"></h4>
             <h5 class="Deadline"></h5>
             <!-- <p class="LiveCountdown" id="liveCountdown">⏳ Countdown loading...</p> -->
@@ -93,6 +123,11 @@
   </div>
 </div> -->
 <div class="outside hidden"></div>
+<div id="location-loading" class="hidden loading-overlay">
+  <div class="loader"></div>
+  <p>Getting your location…</p>
+</div>
+
 <script src="inputTask.js">
 
 
