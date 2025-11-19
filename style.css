@@ -549,6 +549,55 @@ input {
   }
 }
 @media (max-width: 768px) {
+  /* Info Modal Adjustments for Mobile */
+  .info-modal {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .info-content {
+    width: 95%;
+    max-width: 360px;
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .info-title {
+    font-size: 1.3rem;
+  }
+
+  .info-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .warning {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+  }
+
+  .close-info {
+    font-size: 22px;
+    top: 8px;
+    right: 12px;
+  }
+
+  .info-btn {
+    top: 10px;
+    right: 10px;
+    padding: 10px 12px;
+    font-size: 20px;
+  }
+
+
   .modal-content {
     width: 90%;
     padding: 1.5rem;
