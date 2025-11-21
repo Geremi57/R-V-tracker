@@ -1,91 +1,123 @@
-# 📝 Task Manager App
+# 🌟 RV Tracker  
+*A lightweight tool designed to help Jehovah’s Witnesses organize, track, and navigate return visits.*
 
-A responsive, interactive task management application built with vanilla JavaScript, HTML, and CSS. The app allows users to add, view, and manage tasks with deadlines. It includes live countdowns, localStorage persistence, modals for adding and viewing task details, and elegant UI/UX interactions.
+RV Tracker is a simple, offline-friendly web application that allows users to record return visits (RVs), save notes, set deadlines, store precise GPS locations, and navigate directly to a return visit using Google Maps.  
+It is fast, clean, responsive, and built with pure **HTML, CSS, and JavaScript**.
 
----
-
-## 🚀 Live Features
-
-### ✅ Core Features
-
-- **Add New Task**
-  - Input title, description (note), and deadline via modal.
-  - Validation ensures title and time are required.
-
-- **View Task Details**
-  - Click on a task to open a modal showing:
-    - Task title
-    - Description
-    - Countdown to deadline
-
-- **Countdown Timer**
-  - Real-time countdown per task (days, hours, minutes, seconds).
-  - Updates every second.
-
-- **Mark as Completed**
-  - Check off a task to remove it from the list with a smooth slide-out animation.
-
-- **Local Storage Persistence**
-  - Tasks remain saved even after refreshing or reopening the browser.
-
-- **Responsive Design**
-  - Fully mobile-friendly layout.
-  - Touch-optimized interactions and modal sizing for small screens.
-
-- **Form Validation and Feedback**
-  - Required fields show warnings if left empty.
-  - Modals close on Escape key or overlay click.
+> **Disclaimer:**  
+> This tool is **not an official application of Jehovah’s Witnesses** or the Watch Tower Bible and Tract Society.  
+> It is a personal project built to help Witnesses stay organized during the ministry.
 
 ---
 
-## 🧠 Programming Paradigms & Patterns
+## ✨ Features
 
-### 💡 Object-Oriented Programming (OOP)
-- The app uses classes to encapsulate logic:
-  - `Task`: Handles individual task data, parsing time, rendering, and countdown logic.
-  - `Modal`: Inherits from `Task`, handles uploading new tasks and rendering modals.
+### ✅ Add New Return Visits  
+- Save a person’s name  
+- Add notes or details  
+- Set a return date/time (deadline)
 
-### 📦 Modular Design
-- All logic is encapsulated within classes and clean functions.
-- Event listeners are organized by feature and bound properly.
+### ✅ Precise Location Tracking  
+- Save your **exact current GPS location** using high-accuracy geolocation  
+- Reverse-geocoding converts coordinates into short readable addresses  
+- Addresses are automatically cleaned and shortened  
 
-### 🧼 Declarative & Imperative Mix
-- Declarative: Uses `.innerHTML` and template strings to build the DOM in a readable way.
-- Imperative: DOM events and countdown logic are handled step-by-step (setInterval, classList manipulations, etc.)
+### ✅ Google Maps Navigation  
+- Navigate straight to an RV location  
+- Automatic origin detection (your current position)  
+- Supports coordinate-based navigation or text-based locations  
 
-### ♻️ DRY Principles
-- Task rendering and event bindings are abstracted to avoid repetition.
-- Countdown logic is reused for both inline and modal displays.
+### ✅ LocalStorage Persistence  
+All return visits are saved on your device automatically —  
+no sign-in, no server, no internet required (except for navigation + reverse geocoding).
 
----
+### ✅ Beautiful UI  
+- Animated background video  
+- Smooth modals  
+- Clean typography  
+- Responsive on mobile  
+- Styled info/disclaimer popup  
 
-## 🛠️ Technologies Used
-
-| Tech           | Purpose                         |
-|----------------|----------------------------------|
-| HTML5          | Semantic structure              |
-| CSS3           | Styling and responsive design   |
-| JavaScript (ES6+) | Application logic, DOM, OOP |
-| Local Storage  | Persistent data storage         |
-| Font Awesome   | Icons and visual feedback       |
-
----
-
-## 📱 Responsive Design
-
-The UI adapts gracefully to different screen sizes:
-
-- Modals scale based on viewport width/height.
-- Inputs and buttons are touch-friendly.
-- On smaller screens:
-  - Task notes resize vertically.
-  - Modal content and buttons realign automatically.
+### ✅ Countdown Notifications  
+- Each RV has a countdown timer  
+- Browser-based notifications warn you before the RV deadline  
+- Mobile support enabled (with permission)
 
 ---
 
-## 📦 Setup & Usage
+## 📸 Screenshots
+*(Add screenshots here if you want — recommended for GitHub)*
 
-1. **Clone the Repo**
-   ```bash
-   git clone https://github.com/yourusername/task-manager.git
-   cd task-manager
+---
+
+## 🛠️ Tech Stack
+- **HTML5**
+- **CSS3**
+- **Vanilla JavaScript**
+- **Geolocation API**
+- **Google Maps Directions API (URL form)**
+- **Nominatim Reverse Geocoding**
+- **LocalStorage**
+
+---
+
+## 🚀 How It Works
+
+### 1. Add a Return Visit
+Click the **“New RV”** button → fill in:
+- Name  
+- Notes  
+- Deadline  
+- (Optional) Save your precise location  
+
+### 2. Save GPS Location
+Click **“Set Location”** →  
+The app:
+- Gets your exact coordinates  
+- Shows a loading animation  
+- Converts it to a readable address  
+- Saves it under that RV card  
+
+### 3. Navigate to a Visit
+Every saved RV includes a **Navigate** button.
+
+It automatically sets:
+- **origin** → your current location  
+- **destination** → saved coordinates or text location  
+
+---
+
+## 📍 Location Format
+Long reverse-geocoded strings like:  
+
+
+
+Njugu Lane, City Centre sublocation, Starehe location, CBD division, Starehe, Nairobi...
+
+
+Are automatically shortened to:  
+
+Njugu Lane
+
+
+For cleaner display and easier navigation.
+
+---
+
+## 🔔 Notifications
+The app requests notification permission and triggers alerts shortly before deadlines.
+
+---
+
+## ⚠️ Disclaimer
+This project is **not** affiliated with Jehovah’s Witnesses or the Watch Tower Society.  
+It is *purely a helpful tool for personal use* in field service.
+
+---
+
+## 📦 Installation
+Clone the project:
+
+```sh
+git clone https://github.com/Geremi57/rv-tracker.git
+
