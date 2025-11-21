@@ -139,6 +139,36 @@ async function openInMaps(destLat, destLon) {
 }
 
 
+async function openInMapsFlexible(destination) {
+  try {
+    const pos = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, {
+        enableHighAccuracy: true,
+        timeout: 15000,
+      });
+    });
+
+    const originLat = pos.coords.latitude;
+    const originLon = pos.coords.longitude;
+    let url = "";
+
+    // If destination is coordinates
+    if (typeof destination === "object" && destination.lat && destination.lon) {
+      url = `https://www.google.com/maps/dir/?api=1&origin=${originLat},${originLon}&destination=${destination.lat},${destination.lon}`;
+    } 
+    // If destination is a text string
+    else {
+      url = `https://www.google.com/maps/dir/?api=1&origin=${originLat},${originLon}&destination=${encodeURIComponent(destination)}`;
+    }
+
+    window.open(url, "_blank");
+  } catch (err) {
+    alert("Unable to get your current location: " + err.message);
+  }
+}
+
+
+
 
 async function reverseGeocode(lat, lon) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
@@ -387,17 +417,16 @@ class Modal extends task {
   const newNavigate = document.querySelector(".navigate");
 
   // If coords exist on the task, enable the navigation button
-  if (task.coords && task.coords.lat && task.coords.lon) {
-  newNavigate.onclick = () => openInMaps(task.coords.lat, task.coords.lon);
+if (task.coords && task.coords.lat && task.coords.lon) {
+  // Use coordinates as destination
+  newNavigate.onclick = () => openInMapsFlexible(task.coords);
 } else if (task.location && task.location.trim().length > 0) {
-  newNavigate.onclick = () =>
-    window.open(
-      `https://www.google.com/maps/dir/?api=1&query=${encodeURIComponent(task.location)}`,
-      "_blank"
-    );
+  // Use manual text destination
+  newNavigate.onclick = () => openInMapsFlexible(task.location);
 } else {
   newNavigate.disabled = true;
 }
+
 
   function shortenAddress(fullAddress) {
   return fullAddress.split(",")[0].trim();
