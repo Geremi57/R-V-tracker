@@ -46,8 +46,11 @@ no sign-in, no server, no internet required (except for navigation + reverse geo
 ---
 
 ## 📸 Screenshots
-*(Add screenshots here if you want — recommended for GitHub)*
+![Preview for Details Input](./img//Screenshot%20from%202025-11-24%2019-50-53.png)
 
+![Preview for return info](./img/Alton.png)
+
+![Pin Point location Tracking to the area of the return visit](./img/location.png)
 ---
 
 ## 🛠️ Tech Stack
@@ -119,5 +122,5 @@ It is *purely a helpful tool for personal use* in field service.
 Clone the project:
 
 ```sh
-git clone https://github.com/Geremi57/rv-tracker.git
+git clone https://github.com/Geremi57/R-V-tracker.git
 
